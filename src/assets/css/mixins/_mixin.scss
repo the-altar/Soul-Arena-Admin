@@ -1,0 +1,12 @@
+@mixin box($width, $height: $width) {
+  width: $width;
+  height: $height;
+  box-sizing: border-box;
+}
+
+@mixin center($orientation:row){
+    display: flex;
+    flex-direction: $orientation;
+    justify-content: center;
+    align-items: center;
+}
