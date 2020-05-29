@@ -14,6 +14,7 @@
     </div>
 
     <button class='btn btn--large' @click='effectModal=true'>Edit effects</button>
+    <button class="btn btn--large" @click="printData">Print data</button>
 
     <Modal v-if='effectModal' v-on:closeModal='effectModal=false'>
       <EffectField :eIndex='effectIndex' :sIndex='index' />
@@ -64,6 +65,11 @@ export default {
   computed: {
     params() {
       return this.$store.state.character.skills[this.index];
+    }
+  },
+  methods:{
+    printData(){
+      console.log(this.params)  
     }
   },
   watch: {
