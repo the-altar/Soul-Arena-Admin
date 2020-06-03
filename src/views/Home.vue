@@ -37,7 +37,7 @@ export default {
     axios
       .get("/character")
       .then(res => {
-        this.characters = res.data.docs;
+        this.characters = res.data;
       })
       .catch(err => {
         console.log(err);

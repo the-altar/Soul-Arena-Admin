@@ -1,7 +1,4 @@
-# sa-admin
-
 # Data setup
-- [sa-admin](#sa-admin)
 - [Data setup](#data-setup)
   - [Classes](#classes)
     - [Cost](#cost)
@@ -74,3 +71,4 @@ Deals more damage to whatever each type is strong against and takes less damage 
 | `description`   | \<String>      | -         | String describing whatever it is that the skill does. Fluff text.             |
 | `disabled`      | \<Boolean>     | false     | If true the skill cannot be used.                                             |
 | `energyGain`    | \<Array[Cost]> | []        | [Refer to Cost](#cost)                                                        |
+| `limit`        | \<Integer>      | -         | How many times a skill may be used per game 
