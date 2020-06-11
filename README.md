@@ -5,6 +5,7 @@
     - [Types](#types)
     - [Character](#character)
     - [Skill](#skill)
+    - [General Effect](#general-effect)
  
 
 ## Classes
@@ -71,4 +72,16 @@ Deals more damage to whatever each type is strong against and takes less damage 
 | `description`   | \<String>      | -         | String describing whatever it is that the skill does. Fluff text.             |
 | `disabled`      | \<Boolean>     | false     | If true the skill cannot be used.                                             |
 | `energyGain`    | \<Array[Cost]> | []        | [Refer to Cost](#cost)                                                        |
-| `limit`        | \<Integer>      | -         | How many times a skill may be used per game 
+| `limit`         | \<Integer>     | -         | How many times a skill may be used per game                                   |
+
+### General Effect
+
+| Key            | Type       | Description                                                                                                                |
+| -------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
+| duration       | <Integer>  | How many turns this effect will last                                                                                       |
+| delay          | <Integer>  | How many turns this effect will wait before activating. Duration is ignored until then                                     |
+| activationType | <{Bool}>   | Possible keys: Stunned, Damaged, Targeted, Immediate, Expired, Killed, Healed, Countered, Reflected                        |
+| disabled       | <Bool>     | If true this effect will not activate. Meant to be checked only once, when applied                                         |
+| linked         | <Bool>     | If true, this effect will should be removed alongside other effects of the same skill                                      |
+| target         | <String>   | Defines target mode. Possible values: OneEnemy, AllEnemies, OneAlly, AllAllies, AllAlliesExceptSelf, Any, Self             |
+| type           | <{Object}> | Effect type, defines if key is true. Possible keys: Damage, Invulnerability, Counter, Healing, IgnoreEffect, ModSkillParam |
