@@ -1,20 +1,43 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home'
-
 Vue.use(VueRouter)
 
-const routes = [
+const routes = [ 
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path:"/character",
+    component: ()=>import("../views/Home"), 
+    name:"roster"
   },
   {
-    path:"/character/new",
-    name:"NewCharacter",
-    component: () => import("@/views/NewCharacter")
+    path:"/character/:id",
+    component:()=>import("../views/Profile"),
+    name:"profile" 
   },
+  {
+    path:"/skills",
+    component:()=>import("../views/Skills"),
+    name:"skills" 
+  },
+  {
+    path:"/skills/:id",
+    component:()=>import("../views/Skill"),
+    name:"skill" 
+  },
+  {
+    path:"/skills/:effect/:id",
+    component:()=>import("../views/Effect"),
+    name:"effect"
+  },
+  {
+    path:"/license",
+    component:()=>import("../views/License"),
+    name:"license"
+  },
+  {
+    path:"/license/:id",
+    component:()=>import("../views/Licenses"),
+    name:"licenses"
+  }
 ]
 
 const router = new VueRouter({

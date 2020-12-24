@@ -1,0 +1,46 @@
+.profile {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.btn {
+    margin: auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    &-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-profile {
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &-energyGain {
+        margin-right: 1rem;
+    }
+}
+
+.formulate-input-group {
+    display: flex;
+    flex-wrap: wrap;
+    width: 200px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.formulate-input {
+    flex: 0 50%;
+}

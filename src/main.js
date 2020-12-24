@@ -2,12 +2,18 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import Axios from 'axios'
+import VueFormulate from '@braid/vue-formulate'
+const axiosInstance = Axios.create({
+  baseURL: '/'
+})
 
-import charControl from "@/mixin/charControl"
-import "./assets/css/custom.scss"
+Vue.use(VueFormulate, {
+  uploader: axiosInstance,
+})
 
-Vue.mixin(charControl)
 Vue.config.productionTip = false
+Vue.prototype.$axios = Axios;
 
 new Vue({
   router,
