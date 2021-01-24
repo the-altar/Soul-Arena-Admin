@@ -37,7 +37,6 @@ export default {
   mixins: [mixin],
   methods: {
     addEffect() {
-        console.log("ADD")
       if (!this.effect.effectsId) {
         this.$set(this.effect, "effectsId", []);
       }

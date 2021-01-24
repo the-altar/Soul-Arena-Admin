@@ -33,33 +33,6 @@
             help="the max amount of times this effect can be triggered"
           />
         </div>
-
-        <div class="margin">
-          Activate effect
-          <div>
-            <button @click="addEffect()">Add Effect</button>
-            <div
-              class="triggerOnCounter"
-              v-for="(d, key) in effect.triggerOnCounter"
-              :key="key"
-            >
-              <FormulateInput
-                :key="key"
-                type="number"
-                v-model.number="effect.triggerOnCounter[key].id"
-                label="Effect id"
-                help="target specific effect"
-              />
-              <FormulateInput
-                type="checkbox"
-                v-model="effect.triggerOnCounter[key].self"
-                label="Target self"
-                help="If selected this effect will be applied on the caster, rather than target"
-              />
-              <button @click.prevent="effect.triggerOnCounter.splice(key, 1)">x</button>
-            </div>
-          </div>
-        </div>
         <BaseEffect :data="effect" />
       </div>
 
@@ -92,7 +65,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 300px;
-  
+
   button {
     width: 20px;
   }

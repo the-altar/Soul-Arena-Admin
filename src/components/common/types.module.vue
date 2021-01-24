@@ -2,7 +2,7 @@
   <div class="types">
     <FormulateInput
       name='type'
-      :options='pokemonTypes'
+      :options='characterTypes'
       type='checkbox'
       label='Select a type'
       validation='required'
@@ -13,9 +13,9 @@
 <script>
 export default {
   computed: {
-    pokemonTypes() {
+    characterTypes() {
       let b = {}
-      const e = this.$store.getters["enums/getEnum"]("pokemonTypings")
+      const e = this.$store.getters["enums/getEnum"]("characterTypings")
       for(let key in Object.keys(e).slice(0,18)){
         b[key] = e[key]
       }

@@ -37,7 +37,6 @@ export default {
   watchers,
   methods: {
     async deleteMission(id, banner) {
-      console.log(id, banner);
       try {
         await this.$axios.delete(`/mission/${id}/${banner}`);
         const r = await this.$axios.get("/mission");

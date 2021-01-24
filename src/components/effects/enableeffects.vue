@@ -21,13 +21,6 @@
               help="target specific effect"
             />
           </div>
-
-          <FormulateInput
-            :key="key"
-            v-model.number="effect.message"
-            label="Display message"
-            help="What message should be displayed for this specific effect"
-          />
         </div>
       </section>
       <FormulateInput class="btn" type="submit" label="Save changes" />
@@ -44,7 +37,6 @@ export default {
   mixins: [mixin],
   methods: {
     addEffect() {
-      console.log("ADD");
       if (!this.effect.effectsId) {
         this.$set(this.effect, "effectsId", []);
       }

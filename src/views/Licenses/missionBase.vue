@@ -4,7 +4,7 @@
       type="text"
       placeholder="Type it here"
       label="License title"
-      required='true'
+      required="true"
       name="title"
       v-model="license.name"
     />
@@ -13,7 +13,7 @@
       type="text"
       placeholder="Type it here"
       label="License description"
-      required='true'
+      required="true"
       v-model="license.description"
     />
 
@@ -23,19 +23,27 @@
       label="Assign entity"
       :options="charIds"
       name="entity_id"
-      required='true'
+      required="true"
+    />
+
+    <FormulateInput
+      type="number"
+      label="Difficulty level"
+      required="true"
+      v-model.number="license.difficulty_level"
+      placeholder="0"
     />
 
     <FormulateInput
       type="number"
       label="Required level"
-      required='true'
+      required="true"
       v-model.number="license.level_requirement"
     />
 
     <FormulateInput
       type="number"
-      required='true'
+      required="true"
       placeholder="How much does it cost?"
       label="Coins"
       name="coins"
@@ -47,14 +55,12 @@
       label="Is mission public?"
       v-model.number="license.released"
     />
-
-
   </div>
 </template>
 
 <script>
 export default {
-    props:['license', 'charIds']
+  props: ["license", "charIds", "charDexNumbers"],
 };
 </script>
 

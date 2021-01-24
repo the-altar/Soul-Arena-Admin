@@ -1,29 +1,28 @@
 <template>
   <div>
-    <h1>Skill Cost Change</h1>
+    <h1>Replace Skill Cost</h1>
     <FormulateForm class="container" @submit="eventHandler">
       <div class="flex">
         <BaseEffect :data="effect" />
         <div>
-          <FormulateInput
-            v-model.number="effect.value"
-            type="number"
-            label="Value"
-            help="Numerical value for how much energy should increased/decreased"
-          />
+          <button v-if="!effect.reiatsuReplacement" @click="generate()">
+            Generate
+          </button>
+          <div v-else class="flex">
+            <input
+              class="cost-input"
+              v-for="(e, key) in effect.reiatsuReplacement"
+              :key="key"
+              v-model.number="effect.reiatsuReplacement[key]"
+              type="number"
+            />
+          </div>
           <FormulateInput
             v-model.number="effect.specificSkillTarget"
             type="select"
             :options="skillIdList"
             label="Skill"
             help="Select here if only a specific skill should be targeted or not"
-          />
-          <FormulateInput
-            v-model.number="effect.reiatsuCostType"
-            label="Reiatsu"
-            type="select"
-            help="Which type should be altered"
-            :options="reiatsuTypes"
           />
         </div>
       </div>
@@ -43,6 +42,11 @@ export default {
       skillIdList: {},
     };
   },
+  methods: {
+    generate() {
+      this.$set(this.effect, "reiatsuReplacement", [0, 0, 0, 0, 0]);
+    },
+  },
   async created() {
     try {
       const a = await this.$axios.get("/skill/ids");
@@ -61,4 +65,9 @@ export default {
 
 
 <style>
+.cost-input {
+  width: 35px;
+  height: 15px;
+  margin: 2px;
+}
 </style>

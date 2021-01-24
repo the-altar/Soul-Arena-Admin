@@ -24,7 +24,7 @@
           </div>
 
           <div v-if="goal">
-            <MissionGoal :goal="goal" :charIds="charIds" />
+            <MissionGoal :goal="goal" :charDexNumbers="charDexNumbers" />
           </div>
         </div>
       </div>
@@ -50,6 +50,7 @@ export default {
       },
       goal: null,
       charIds: {},
+      charDexNumbers: {},
       isNew: true,
     };
   },
@@ -72,7 +73,8 @@ export default {
         this.license.unlocked_entity,
         this.license.cost,
         this.license.banner,
-        this.license.released || false
+        this.license.released || false,
+        this.license.difficulty_level || 0,
       ];
 
       try {
@@ -85,8 +87,7 @@ export default {
         if (res.data.success) alert("Uploaded!");
         else alert("...failed :(");
       } catch (err) {
-        console.log(err)
-        alert("Something went wrong!");
+        alert(err);
       }
     },
   },
@@ -94,10 +95,13 @@ export default {
   async created() {
     const res = await Axios.get("/character/ids");
     const p = {};
+    const dexNumbers = {};
     res.data.forEach((e) => {
       p[e.id] = e.name;
+      dexNumbers[e.dexNumber] = e.name;
     });
     this.charIds = p;
+    this.charDexNumbers = dexNumbers;
     if (this.$route.params.id === "new")
       this.license.banner = generateRandomString();
     else {

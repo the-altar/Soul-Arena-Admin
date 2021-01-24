@@ -35,6 +35,8 @@
             label="Select a targeting mode"
             :options="targetClasses"
           />
+
+          <RequiresSkillIdOnTarget :skill="skill" />
         </div>
 
         <div class="center center-col">
@@ -160,6 +162,11 @@ export default {
         const ids = await this.$axios.get("/character/ids");
         this.charIds = ids.data;
         this.skill = skill.data.data;
+        if (!this.skill.requiresSkillOnTarget) {
+          this.$set(this.skill, "requiresSkillOnTarget", []);
+          // eslint-disable-next-line no-console
+          console.log(this.skill.requiresSkillOnTarget)
+        }
         this.skillId = skill.data.id;
         this.priority = skill.data.priority;
         this.assignedEntity = skill.data.entity_id;
@@ -175,7 +182,7 @@ export default {
         this.skill = {
           cost: [0, 0, 0, 0, 0],
           effects: [],
-          type: [],
+          requiresSkillOnTarget: [],
           skillpic: generateRandomString(),
           banner: generateRandomString(),
         };

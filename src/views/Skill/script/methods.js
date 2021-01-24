@@ -20,7 +20,6 @@ const saveNewEffect = async function () {
 
 const deleteEffect = async function (effectIndex) {
     this.skill.effects.splice(effectIndex, 1)
-    console.log(this.skill.effects)
     try {
         await this.$axios.post("/character/update", this.char)
     } catch (err) {
@@ -35,7 +34,6 @@ const displayEffects = async function(e){
 
 const createNewEffect = function(){
     if(this.newEffect !== null) {
-        console.log(this.skill.effects)
         this.skill.effects.push({type:this.newEffect})
     }
 }

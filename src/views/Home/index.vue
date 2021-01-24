@@ -2,17 +2,17 @@
   <main class='home'>
     <div class='home-chars'>
       <div v-for='(char, k) in chars' :key='k' class='home-char'>
-        <img :src="`http://game.lvh.me:8080/uploads/${char.data.facepic}.jpg`"  :alt='char.data.name' />
+        <img :src="`https://game.soul-arena.app/uploads/${char.data.facepic}.jpg`"  :alt='char.data.name' />
         <p class="home-char-order">
           Order: {{char.data.dexNumber}}, id:{{char.id}}
         </p>
-        <router-link :to='`/character/${char.id}`'>Edit</router-link>
+        <router-link :to='`/profile/${char.id}`'>Edit</router-link>
         <button @click='deleteChar(char.id)'>Delete</button>
       </div>
     </div>
 
     <div>
-      <button @click='$router.push("/character/new")'>Create new character</button>
+      <button @click='$router.push("/profile/new")'>Create new character</button>
     </div>
   </main>
 </template>

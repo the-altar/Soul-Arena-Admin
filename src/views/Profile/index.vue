@@ -1,8 +1,8 @@
 <template>
   <div v-if="character" class="profile">
     <p>
-      <img v-if="!newChar" :src="`http://game.lvh.me:8080/uploads/${character.facepic}.jpg`" />
-      <router-link :to="`/character`">Go Back</router-link>
+      <img v-if="!newChar" :src="`https://game.soul-arena.app/uploads/${character.facepic}.jpg`" />
+      <router-link :to="`/roster`">Go Back</router-link>
     </p>  
     <FormulateForm @submit="submitHandler" class="form" v-model="mock">
       <div class="form-col">

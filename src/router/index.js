@@ -4,12 +4,12 @@ Vue.use(VueRouter)
 
 const routes = [ 
   {
-    path:"/character",
+    path:"/roster",
     component: ()=>import("../views/Home"), 
     name:"roster"
   },
   {
-    path:"/character/:id",
+    path:"/profile/:id",
     component:()=>import("../views/Profile"),
     name:"profile" 
   },

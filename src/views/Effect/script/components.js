@@ -25,6 +25,9 @@ import ignoreinvulnerability from "@/components/effects/ignoreinvulnerability.vu
 import disableeffects from "@/components/effects/disableeffects.vue";
 import increasecasterskillduration from "@/components/effects/increasecasterskillduration.vue";
 import increasetargetskillduration from "@/components/effects/increasetargetskillduration.vue";
+import replaceskillcost from "@/components/effects/replaceskillcost.vue";
+import ignoreeffects from "@/components/effects/ignoreeffects.vue";
+import ignoredeath from "@/components/effects/ignoredeath.vue";
 
 export default {
   stun,
@@ -54,4 +57,7 @@ export default {
   increasecasterskillduration,
   ignoreinvulnerability,
   disableeffects,
+  ignoredeath,
+  replaceskillcost,
+  ignoreeffects,
 };
