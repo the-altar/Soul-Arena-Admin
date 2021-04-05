@@ -18,6 +18,14 @@
             label="Shoudl counter specific effect"
             help="Example: Stun, Healing, Damage, etc..."
           />
+
+          <FormulateInput
+            type="checkbox"
+            v-model.number="effect.harmfulSkillsOnly"
+            label="Harmful skills only"
+            help="Only harmful skills will be countered, even if they meet another criteria"
+          />
+
           <FormulateInput
             type="checkbox"
             v-model.number="effect.isDefensive"

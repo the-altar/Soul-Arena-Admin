@@ -73,42 +73,19 @@
     </div>
 
     <div>
-      <h4>Link effect</h4>
-      <div>
-        <button @click="addEffect()">Add Effect</button>
-        <div v-for="(d, key) in effect.triggerLinkedEffects" :key="key">
-          <FormulateInput
-            :key="key"
-            type="number"
-            v-model.number="effect.triggerLinkedEffects[key].id"
-            label="Effect id"
-            help="target specific effect"
-          />
-          <div>
-            <FormulateInput
-              type="checkbox"
-              v-model="effect.triggerLinkedEffects[key].self"
-              label="Target self"
-              help="If selected this effect will be applied on the caster, rather than target"
-            />
-            <FormulateInput
-              type="checkbox"
-              v-model="effect.triggerLinkedEffects[key].victim"
-              label="Target countered character"
-              help="If selected this effect will be applied on whomever was countered"
-            />
-          </div>
-          <button @click.prevent="effect.triggerLinkedEffects.splice(key, 1)">
-            x
-          </button>
-        </div>
-      </div>
-
       <FormulateInput
         type="text"
         v-model.number="effect.message"
         label="Effect tooltip"
         help="This message will be displayed once the effect has been cast!"
+      />
+
+      <FormulateInput
+        type="number"
+        v-model.number="effect.tick"
+        label="Initial Tick Value"
+        help="If an odd value is set the effect will be applied in reverse, 0 is the default"
+        placeholder="0"
       />
 
       <FormulateInput
@@ -137,6 +114,13 @@
 
       <FormulateInput
         type="checkbox"
+        v-model="effect.ignoresInvulnerability"
+        label="Ignores invulnerability"
+        help="Will ignore invulnerabily effects when applied"
+      />
+
+      <FormulateInput
+        type="checkbox"
         v-model="effect.compulsory"
         label="Is compulsory"
         help="Compulsory effects will trigger regardless of tick value if requirements are met"
@@ -148,6 +132,53 @@
         label="Terminal"
         help="Once effect ends the whole skill should be finished"
       />
+    </div>
+
+    <div>
+      <h4>Link effect</h4>
+      <div>
+        <button @click.prevent="addEffect()">Add Effect</button>
+        <div v-for="(d, key) in effect.triggerLinkedEffects" :key="key">
+          <FormulateInput
+            :key="key"
+            type="select"
+            v-model.number="effect.triggerLinkedEffects[key].condition"
+            label="Condition"
+            help="Will be linked (applied) when this condition is met"
+            :options="triggerTypes"
+          />
+          <FormulateInput
+            :key="key"
+            type="number"
+            v-model.number="effect.triggerLinkedEffects[key].id"
+            label="Effect id"
+            help="target specific effect"
+          />
+          <div>
+            <FormulateInput
+              type="checkbox"
+              v-model="effect.triggerLinkedEffects[key].self"
+              label="Target self"
+              help="If selected this effect will be applied on the caster, rather than target"
+            />
+            <FormulateInput
+              type="checkbox"
+              v-model="effect.triggerLinkedEffects[key].victim"
+              label="Target countered character"
+              help="If selected this effect will be applied on whomever was countered"
+            />
+            <FormulateInput
+              type="checkbox"
+              v-model="effect.triggerLinkedEffects[key].target"
+              label="Target"
+              help="Link will be applied on whomever was the original target"
+            />
+          </div>
+          <button @click.prevent="effect.triggerLinkedEffects.splice(key, 1)">
+            x
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>

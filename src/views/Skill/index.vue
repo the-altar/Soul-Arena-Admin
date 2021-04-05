@@ -3,129 +3,21 @@
     <h1>{{ skill.name }}, {{ $route.params.id }}</h1>
 
     <FormulateForm @submit="submitHandler" class="skill">
-      <div class="center mb">
-        <div>
-          <FormulateInput
-            v-model="skill.name"
-            type="text"
-            label="Skill name"
-            placeholder="type it here"
-          />
-          <FormulateInput
-            v-model.number="skill.description"
-            type="textarea"
-            label="Skill description"
-            :options="classes"
-          />
-          <FormulateInput
-            v-model.number="skill.class"
-            type="select"
-            label="Select a class for this skill"
-            :options="classes"
-          />
-          <FormulateInput
-            v-model.number="skill.persistence"
-            type="select"
-            label="Select a persistence class for this skill"
-            :options="controlClasses"
-          />
-          <FormulateInput
-            v-model.number="skill.targetMode"
-            type="select"
-            label="Select a targeting mode"
-            :options="targetClasses"
-          />
-
-          <RequiresSkillIdOnTarget :skill="skill" />
-        </div>
-
-        <div class="center center-col">
-          <div class="skill-cost">
-            <FormulateInput
-              class="skill-cost-item"
-              v-model.number="skill.cost[x - 1]"
-              v-for="x in 5"
-              :key="x"
-              type="number"
-              validation="required|number|between:-1,20"
-              :help="`${reiatsuCost[x - 1]}`"
-            />
-          </div>
-
-          <div class="skill-cooldown">
-            <FormulateInput
-              v-model.number="skill.baseCooldown"
-              name="baseCooldown"
-              type="number"
-              label="Base Cooldown"
-            />
-            <FormulateInput
-              v-model.number="skill.startCooldown"
-              name="startCooldown"
-              type="number"
-              label="Starting Cooldown"
-            />
-          </div>
-
-          <div class="skill-pics">
-            <Uploader
-              v-show="!effectDisplay"
-              :filename="skill.skillpic"
-              :label="'Select a picture (75x75)'"
-            />
-            <Uploader
-              v-show="!effectDisplay"
-              :filename="skill.banner"
-              :label="'Select a banner (200x200)'"
-            />
-          </div>
-        </div>
-
-        <div class="skill-type">
-          <FormulateInput
-            v-model="skill.disabled"
-            type="checkbox"
-            label="Is disabled"
-            placeholder="type it here"
-          />
-          <FormulateInput
-            v-model="skill.harmful"
-            type="checkbox"
-            label="Is Harmful"
-          />
-          <div>
-            <FormulateInput
-              v-model="skill.uncounterable"
-              type="checkbox"
-              label="Is uncounterable"
-              help="whether this skill can be countered or not. False by default"
-            />
-          </div>
-        </div>
-
-        <div>
-          <FormulateInput
-            v-model.number="assignedEntity"
-            type="select"
-            :options="entities"
-            placeholder="Select to assign this skill"
-            label="Assigned to"
-            help="which character owns this skill"
-          />
-
-          <FormulateInput
-            v-model.number="priority"
-            label="Priority"
-            help="Order in which skills should be sorted"
-          />
-        </div>
-      </div>
+      <Body
+        :data="skill"
+        :assignedEntity="assignedEntity"
+        :priority="priority"
+        :charIds="charIds"
+        :asComponent="asComponent"
+        @update-ae="setAssignedEntity"
+        @update-prio="setPriority"
+      ></Body>
       <button @click="displayEffects" class="btn">Effects</button>
       <FormulateInput class="btn" type="submit" label="Save changes" />
     </FormulateForm>
 
     <Effect
-      v-if="effectDisplay"
+      v-if="effectDisplay && !asComponent"
       :skillId="skillId"
       @close="effectDisplay = false"
     />
@@ -139,6 +31,7 @@ import methods from "./script/methods";
 import watchers from "./script/watchers";
 
 export default {
+  props: ["asComponent"],
   data() {
     return {
       skill: false,
@@ -155,7 +48,13 @@ export default {
   methods,
   watchers,
   async created() {
-    if (this.$route.params.id !== "new") {
+    if (this.asComponent) {
+      this.skill = {
+        cost: [0, 0, 0, 0, 0],
+        requiresSkillOnTarget: [],
+        cannotBeUsedOnTargetOf: [],
+      };
+    } else if (this.$route.params.id !== "new") {
       try {
         const id = this.$route.params.id;
         const skill = await this.$axios.get(`/skill/${id}`);
@@ -163,9 +62,11 @@ export default {
         this.charIds = ids.data;
         this.skill = skill.data.data;
         if (!this.skill.requiresSkillOnTarget) {
-          this.$set(this.skill, "requiresSkillOnTarget", []);
-          // eslint-disable-next-line no-console
-          console.log(this.skill.requiresSkillOnTarget)
+          this.$set(this.skill, "cannotBeUsedOnTargetOf", []);
+        }
+
+        if (!this.skill.cannotBeUsedOnTargetOf) {
+          this.$set(this.skill, "cannotBeUsedOnTargetOf", []);
         }
         this.skillId = skill.data.id;
         this.priority = skill.data.priority;
@@ -183,6 +84,7 @@ export default {
           cost: [0, 0, 0, 0, 0],
           effects: [],
           requiresSkillOnTarget: [],
+          cannotBeUsedOnTargetOf: [],
           skillpic: generateRandomString(),
           banner: generateRandomString(),
         };
@@ -201,6 +103,6 @@ function generateRandomString() {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "./style";
 </style>

@@ -1,9 +1,12 @@
 <template>
   <div v-if="character" class="profile">
     <p>
-      <img v-if="!newChar" :src="`https://game.soul-arena.app/uploads/${character.facepic}.jpg`" />
+      <img
+        v-if="!newChar"
+        :src="`https://game.soul-arena.app/uploads/${character.facepic}.jpg`"
+      />
       <router-link :to="`/roster`">Go Back</router-link>
-    </p>  
+    </p>
     <FormulateForm @submit="submitHandler" class="form" v-model="mock">
       <div class="form-col">
         <div class="form-energyGain">
@@ -25,6 +28,13 @@
             type="checkbox"
             name="isFree"
             label="Is a starter character"
+          />
+
+          <FormulateInput
+            type="number"
+            name="Cost"
+            v-model="character.cost"
+            label="How many coins are needed to purchase this character"
           />
         </div>
         <Profile class="form-profile" :character="character"></Profile>
@@ -76,20 +86,25 @@ export default {
 
 function validatePics(character) {
   if (character.facepic === undefined)
-    character.facepic = generateRandomString('f__');
-  if (character.banner === undefined) character.banner = generateRandomString('b__');
+    character.facepic = generateRandomString("f__");
+  if (character.banner === undefined)
+    character.banner = generateRandomString("b__");
   if (character.skills === undefined) character.skills = [];
   for (let skill of character.skills) {
-    if (skill.skillpic === undefined) skill.skillpic = generateRandomString('s__');
+    if (skill.skillpic === undefined)
+      skill.skillpic = generateRandomString("s__");
   }
   return character;
 }
 
 function generateRandomString(prefix) {
-  return prefix+Math.random()
-    .toString(36)
-    .replace(/[^a-z]+/g, "")
-    .substr(0, 5);
+  return (
+    prefix +
+    Math.random()
+      .toString(36)
+      .replace(/[^a-z]+/g, "")
+      .substr(0, 5)
+  );
 }
 </script>
 

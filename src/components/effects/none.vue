@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Health Drain</h1>
+    <h1>Neutral base effect</h1>
     <FormulateForm class="container" @submit="eventHandler">
       <section class="flex">
         <BaseEffect :data="effect" />

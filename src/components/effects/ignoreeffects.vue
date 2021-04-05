@@ -1,6 +1,6 @@
 <template>
   <div v-if="char">
-    <h1>Stun</h1>
+    <h1>Ignore effects</h1>
     <FormulateForm @submit="eventHandler">
       <div class="flex">
         <Base :data="effect" />

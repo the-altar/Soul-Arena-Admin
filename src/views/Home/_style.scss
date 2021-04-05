@@ -1,24 +1,26 @@
 .home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-chars {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    &-chars {
-        display: flex;
-        justify-content: center;
-    }
+    flex-wrap: wrap;
+  }
 
-    &-char {
-        width: 100px;
-        margin: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+  &-char {
+    width: 100px;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
-        &-order {
-            font-size: 12px;
-        }
+    &-order {
+      font-size: 12px;
     }
+  }
 }

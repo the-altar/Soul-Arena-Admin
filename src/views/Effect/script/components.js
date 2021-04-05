@@ -16,6 +16,7 @@ import damageincreasal from "@/components/effects/damageincreasal.vue";
 import absorbdamage from "@/components/effects/absorbdamage.vue";
 import altereffectvalue from "@/components/effects/altereffectvalue.vue";
 import energyremoval from "@/components/effects/energyremoval.vue";
+import energysteal from "@/components/effects/energyremoval.vue";
 import resetcooldown from "@/components/effects/resetcooldown.vue";
 import destructibledefense from "@/components/effects/destructibledefense.vue";
 import enableeffects from "@/components/effects/enableeffects.vue";
@@ -28,9 +29,15 @@ import increasetargetskillduration from "@/components/effects/increasetargetskil
 import replaceskillcost from "@/components/effects/replaceskillcost.vue";
 import ignoreeffects from "@/components/effects/ignoreeffects.vue";
 import ignoredeath from "@/components/effects/ignoredeath.vue";
+import none from "@/components/effects/none.vue";
+import skillmod from "@/components/effects/skillmod";
+import replaceskill from "@/components/effects/replaceskill.vue";
+import increasehealthhealed from "@/components/effects/increasehealthhealed.vue"
 
 export default {
+  none,
   stun,
+  skillmod,
   damage,
   healing,
   counter,
@@ -39,6 +46,7 @@ export default {
   absorbdamage,
   energyremoval,
   effectremoval,
+  replaceskill,
   resetcooldown,
   skilltargetmod,
   invulnerability,
@@ -53,6 +61,7 @@ export default {
   destructibledefense,
   skillcostchange,
   ignoredecreasedamagetaken,
+  increasehealthhealed,
   increasetargetskillduration,
   increasecasterskillduration,
   ignoreinvulnerability,
@@ -60,4 +69,5 @@ export default {
   ignoredeath,
   replaceskillcost,
   ignoreeffects,
+  energysteal
 };

@@ -1,49 +1,54 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+import Vue from "vue";
+import VueRouter from "vue-router";
+Vue.use(VueRouter);
 
-const routes = [ 
+const routes = [
   {
-    path:"/roster",
-    component: ()=>import("../views/Home"), 
-    name:"roster"
+    path: "/roster",
+    component: () => import("../views/Home"),
+    name: "roster",
   },
   {
-    path:"/profile/:id",
-    component:()=>import("../views/Profile"),
-    name:"profile" 
+    path: "/profile/:id",
+    component: () => import("../views/Profile"),
+    name: "profile",
   },
   {
-    path:"/skills",
-    component:()=>import("../views/Skills"),
-    name:"skills" 
+    path: "/skills",
+    component: () => import("../views/Skills"),
+    name: "skills",
   },
   {
-    path:"/skills/:id",
-    component:()=>import("../views/Skill"),
-    name:"skill" 
+    path: "/skills/:id",
+    component: () => import("../views/Skill"),
+    name: "skill",
   },
   {
-    path:"/skills/:effect/:id",
-    component:()=>import("../views/Effect"),
-    name:"effect"
+    path: "/skills/:effect/:id",
+    component: () => import("../views/Effect"),
+    name: "effect",
   },
   {
-    path:"/license",
-    component:()=>import("../views/License"),
-    name:"license"
+    path: "/license",
+    component: () => import("../views/License"),
+    name: "license",
   },
   {
-    path:"/license/:id",
-    component:()=>import("../views/Licenses"),
-    name:"licenses"
-  }
-]
+    path: "/license/:id",
+    component: () => import("../views/Licenses"),
+    name: "licenses",
+  },
+  {
+    path: "/game-stats",
+    component: () => import("../views/GameStats.vue"),
+    name: "game-stats",
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
